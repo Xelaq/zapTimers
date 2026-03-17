@@ -162,8 +162,9 @@ function zapTimer.Check()
 			if not ok then
 				ErrorNoHalt(err)
 
-				--table.remove	1.1521410999103e-05
-				--table[] = nil	1.1539101998114e-05
+				--20 rounds, 1000 timers
+				--table.remove	1.4415000032386e-05
+				--table[] = nil	3.7349999729486e-06
 
 				table.remove(timers, i)
 			else
@@ -178,31 +179,4 @@ function zapTimer.Check()
 	end
 end
 
-function zapTimer.Check2()
-	local t = CurTime()
-
-	for i=1, #timers do
-		local tmr = timers[i]
-		
-		if tmr.lastExec + tmr.delay <= t then
-			local ok, err = xpcall(tmr.func, xpcall_callback)
-			if not ok then
-				ErrorNoHalt(err)
-
-				--table.remove	1.1521410999103e-05
-				--table[] = nil	1.1539101998114e-05
-
-				table.remove(timers, i)
-			else
-				tmr.lastExec = t
-				tmr.reps = tmr.reps - 1
-				if tmr.reps == 0 then
-					table.remove(timers, i)
-				end
-			end
-		end
-		
-	end
-end
-
---hook.Add("Think", "CheckTimers", zapTimer.Check)
+hook.Add("Think", "CheckTimers", zapTimer.Check)
