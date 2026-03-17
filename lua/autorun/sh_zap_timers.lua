@@ -162,21 +162,17 @@ function zapTimer.Check()
 			if not ok then
 				ErrorNoHalt(err)
 
-				--20 rounds, 1000 timers
-				--table.remove	1.4415000032386e-05
-				--table[] = nil	3.7349999729486e-06
-
-				table.remove(timers, i)
+				timers[i] = nil
 			else
 				tmr.lastExec = t
 				tmr.reps = tmr.reps - 1
 				if tmr.reps == 0 then
 
-					table.remove(timers, i)
+					timers[i] = nil
 				end
 			end
 		end
 	end
 end
 
-hook.Add("Think", "CheckTimers", zapTimer.Check)
+hook.Add("Think", "CheckZapTimers", zapTimer.Check)
