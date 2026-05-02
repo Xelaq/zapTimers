@@ -65,13 +65,11 @@ function zapTimer.Simple(delay, func)
 end
 
 
-function zapTimer.Start(hash)
-	local t = hashTable[hash]
+function zapTimer.Start(id)
+	local t = timers[id]
 	if not t then
 		error("Tried to start nonexistant timer: "..tostring(hash),2)
 	end
-
-	t = timers[t]
 
 	t.on = true
 	t.timeDiff = nil
@@ -79,11 +77,9 @@ function zapTimer.Start(hash)
 	return true
 end
 
-function zapTimer.Stop(hash)
-	local t = hashTable[hash]
+function zapTimer.Stop(id)
+	local t = timers[id]
 	if not t then return false end
-
-	t = timers[t]
 
 	t.on = false
 	t.timeDiff = nil
@@ -112,8 +108,6 @@ function zapTimer.UnPause(hash)
 	if not t.timeDiff then
 		error("Tried to unpause nonpaused timer: "..tostring(id),2)
 	end
-
-
 	
 	t.on = true
 	t.lastExec = CurTime() - t.timeDiff
@@ -132,6 +126,8 @@ function zapTimer.Adjust(hash, delay, reps, func)
 	if type(reps) ~= "number" or reps < 0 or math.floor(reps) ~= reps then
 		error("Invalid timer reps: "..tostring(reps),2)
 	end
+
+	t = timers[t]
 
 	t.delay = delay
 	t.reps = reps
