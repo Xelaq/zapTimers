@@ -7,9 +7,7 @@ idk how to accurately measure performance (cause the original timers are written
 
 ```lua
   for i = 1, 320000 do
-      zapTimer.Create("hash"..i, math.Rand( 0.1, 0.2), 3, function() 
-          a = a + 1
-      end)
+      zapTimer.Create("hash"..i, math.Rand( 0.1, 0.2), 3, function() end)
   end
 ```
 On my PC I got:
