@@ -3,7 +3,7 @@ These are simple Lua timers for Garry's Mod, with a pinch of optimization and lo
 
 # Benchmarks
 
-idk how to accurately measure performance, so I roughly recorded the minimum FPS when creating 320,000 timers with 3 repetitions:
+idk how to accurately measure performance (cause the original timers are written in C++), so I roughly recorded the minimum FPS when creating 320,000 timers with 3 repetitions:
 
 ```lua
   for i = 1, 320000 do
@@ -13,7 +13,6 @@ idk how to accurately measure performance, so I roughly recorded the minimum FPS
     end
 ```
 On my PC I got:
-
-Using gmod timers: ~28 FPS
-Using zaptimers: ~48-57 FPS
+* Using gmod timers: ~28 FPS
+* Using zaptimers: ~48-57 FPS
 
